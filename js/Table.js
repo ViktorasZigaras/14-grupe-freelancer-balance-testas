@@ -2,17 +2,24 @@ class Table {
     constructor( account, months ) {
         this.account = account
         this.months = months
+        this.nameDom = document.querySelector( '.container > .row > h1' )
         this.tableDom = document.querySelector( '.table-content' )
         this.footerDom = document.querySelector( '.table-footer' )
         this.summaryDom = document.querySelector( '.summary-list' )
+        this.name = 'Viktoro'
         this.init()       
     }
 
     init() {
+        this.ownName()
         this.parseMonths()
         this.renderRows()
         this.renderFooter()
         this.renderSummary()
+    }
+
+    ownName() {
+        this.nameDom.innerHTML = this.name + ' metai'
     }
 
     parseMonths() {
