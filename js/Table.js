@@ -3,12 +3,14 @@ class Table {
         this.account = account
         this.months = months
         this.tableDom = document.querySelector( '.table-content' )
+        this.footerDom = document.querySelector( '.table-footer' )
         this.init()       
     }
 
     init() {
         this.parseMonths()
-        this.render()
+        this.renderRows()
+        this.renderFooter()
     }
 
     parseMonths() {
@@ -22,7 +24,7 @@ class Table {
         )
     }
 
-    render() {
+    renderRows() {
         let rowHtml = ''
         let income
         let expense
@@ -43,7 +45,6 @@ class Table {
                 if ( expense === 0 ) expense = '-'
                 else expense = expense + ' Eur'
 
-                console.log(income, expense);
                 rowHtml += `
                 <div class="table-row">
                     <div class="cell">${index + 1}</div>
@@ -56,6 +57,26 @@ class Table {
             }
         )
         this.tableDom.innerHTML = rowHtml
+    }
+
+    renderFooter() {
+        let incomes = 0
+        let expenses = 0
+        this.account.forEach( 
+            ( row ) => {
+                if ( row.income ) incomes += row.income
+                if ( row.expense ) expenses += row.expense
+            }
+        )
+        const balance = incomes - expenses
+        let footerHtml = `
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell">${incomes} Eur</div>
+            <div class="cell">${expenses} Eur</div>
+            <div class="cell">${balance} Eur</div>
+        `
+        this.footerDom.innerHTML = footerHtml
     }
 }
 
