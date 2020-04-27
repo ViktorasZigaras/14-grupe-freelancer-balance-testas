@@ -4,6 +4,7 @@ class Table {
         this.months = months
         this.tableDom = document.querySelector( '.table-content' )
         this.footerDom = document.querySelector( '.table-footer' )
+        this.summaryDom = document.querySelector( '.summary-list' )
         this.init()       
     }
 
@@ -11,6 +12,7 @@ class Table {
         this.parseMonths()
         this.renderRows()
         this.renderFooter()
+        this.renderSummary()
     }
 
     parseMonths() {
@@ -77,6 +79,63 @@ class Table {
             <div class="cell">${balance} Eur</div>
         `
         this.footerDom.innerHTML = footerHtml
+    }
+
+    renderSummary() {
+        let maxIncome = 0
+        let maxExpense = 0
+        let minIncome = this.account[0].income // reiktu geriau
+        let minExpense = this.account[1].expense // reiktu geriau
+        let maxIncomeMonth = ''
+        let maxExpenseMonth = ''
+        let minIncomeMonth = ''
+        let minExpenseMonth = ''
+
+        this.account.forEach( 
+            ( row ) => {
+
+                if ( row.income >= 0 && row.income < minIncome ) {
+                    minIncome = row.income
+                    minIncomeMonth = row.monthName
+                }
+
+                if ( row.income > maxIncome ) {
+                    maxIncome = row.income
+                    maxIncomeMonth = row.monthName
+                }
+
+                if ( row.expense >= 0 && row.expense < minExpense ) {
+                    minExpense = row.expense
+                    minExpenseMonth = row.monthName
+                }
+
+                if ( row.expense > maxExpense ) {
+                    maxExpense = row.expense
+                    maxExpenseMonth = row.monthName
+                }
+
+            }
+        )
+
+        let summaryHtml = `
+        <div class="item">
+            <div id="minIncome" class="value">${minIncomeMonth}</div>
+            <div class="title">mėnuo, kai buvo mažiausiai uždirbta,bet ne lygu nuliui</div>
+        </div>
+        <div class="item">
+            <div class="value">${maxIncomeMonth}</div>
+            <div class="title">mėnuo, kai buvo daugiausiai uždirbta</div>
+        </div>
+        <div class="item">
+            <div class="value">${minExpenseMonth}</div>
+            <div class="title">mėnuo, kai buvo mažiausiai išlaidos, bet ne lygios nuliui</div>
+        </div>
+        <div class="item">
+            <div class="value">${maxExpenseMonth}</div>
+            <div class="title">mėnuo, kai buvo didžiausios išlaidos</div>
+        </div>
+        `
+        this.summaryDom.innerHTML = summaryHtml
     }
 }
 
