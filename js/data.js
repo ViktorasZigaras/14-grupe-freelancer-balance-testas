@@ -1,4 +1,4 @@
-const account = [
+export const account = [
     { month: 10, income: 150 },
     { month: 1, income: 200, expense: 50 },
     { month: 3, income: 450, expense: 200 },
@@ -11,4 +11,19 @@ const account = [
     { month: 11, income: 150, expense: 30 },
     { month: 8, income: 450, expense: 120 },
     { month: 12, expense: 200 }
-];
+]
+
+export const months = [
+    { id: 1, name: 'Sausis'},
+    { id: 2, name: 'Vasaris'},
+    { id: 3., name: 'Kovas'},
+    { id: 4, name: 'Balandis'},
+    { id: 5, name: 'Gegužė'},
+    { id: 6, name: 'Birželis'},
+    { id: 7, name: 'Liepa'},
+    { id: 8, name: 'Rugpjūtis'},
+    { id: 9, name: 'Rugsėjis'},
+    { id: 10, name: 'Spalis'},
+    { id: 11, name: 'Lapkritis'},
+    { id: 12, name: 'Gruodis'},
+]
