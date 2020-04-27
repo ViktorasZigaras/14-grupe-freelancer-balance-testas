@@ -39,6 +39,6 @@
         .table > .table-footer > .cell {
             display: inline-block;
             padding: 10px 30px;
-            width: 20%;
+            width: calc(100% / 6);
             float: left;
         }
